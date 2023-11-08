@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--添加包扫描-->
+    <!--    设置业务逻辑层的包扫描器,目的是在指定的路径下,使用@Service注解的类,Spring负责创建对象,并添加依赖-->
+    <context:component-scan base-package="com.bjpowernode.service.impl"/>
+    <!--添加事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--添加事务切面-->
+    <!--用XML的方式声明spring事务-->
+    <!--配置事务通知-->
+    <tx:advice id="myadvice" transaction-manager="transactionManager">
+        <!--配置通知的相关属性-->
+        <tx:attributes>
+            <!--之前所讲的所有的事务属性都可以在一下标签中部署。-->
+            <!--
+               1.<tx:method>：这是一个XML标签，用于定义一个方法。
+               2.name="*select*"：这是方法的名称，它被设置为*select*。
+             在实际使用中，你可以根据需要修改方法的名称。
+               3.read-only="true"：这是一个属性，它指示该方法是否只读。
+             在这个例子中，read-only属性被设置为true，表示该方法只能读取数据，不能修改数据。
+               4.propagation="REQUIRED":这是方法的传播属性，指定了事务的传播行为。
+             如果当前没有事务，则创建一个新的事务；如果当前存在事务，则加入该事务
+            -->
+            <tx:method name="*select*" read-only="true"/>
+            <tx:method name="*find*" read-only="true"/>
+            <tx:method name="*search*" read-only="true"/>
+            <tx:method name="*get*" read-only="true"/>
+            <tx:method name="*insert*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*add*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*save*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*set*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*update*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*change*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*modify*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*delete*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*drop*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*remove*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*clear*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*" propagation="SUPPORTS" read-only="true"/><!--与增删改查等事务无关的方法，如果当前存在事务，则加入该事务；如果当前没有事务，则以非事务方式执行。-->
+        </tx:attributes>
+    </tx:advice>
+    <!--配置切面-->
+    <aop:config>
+        <!--切点-->
+        <!--execution(访问控制权限修饰符 返回值 全限定类名 方法名 （参数） 异常)-->
+        <aop:pointcut id="mypointcut" expression="execution(* com.bjpowernode.crm.service.*.*(..))"/>
+        <!--切面=通知+切点-->
+        <aop:advisor advice-ref="myadvice" pointcut-ref="mypointcut"/>
+    </aop:config>
+</beans>

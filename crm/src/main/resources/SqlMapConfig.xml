@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--帮助我们打印mybatis日志信息。sql语句等-->
+   <settings>
+       <setting name="logImpl" value="STDOUT_LOGGING"/>
+       <!--开启驼峰命名自动映射-->
+       <!--Java的命名规范：首字母小写，后面的每个单词首字母大写，遵循驼峰命名方式
+           SQL命名规范：全部小写，单词之间采用下划线分割。-->
+       <!--<setting name="mapUnderscoreToCamelCase" value="true"/>-->
+       <!--启用全局延迟加载-->
+       <!--<setting name="lazyLoadingEnabled" value="true"/>-->
+   </settings>
+    <!--    分页插件的配置-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
+</configuration>
