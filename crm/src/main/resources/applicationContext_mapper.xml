@@ -9,7 +9,7 @@
     <!--开启aop切面编程-->
     <!--<aop:aspectj-autoproxy/>-->
     <!--    读取jdbc.properties属性文件 -->
-    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+    <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <!--    创建数据源-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
@@ -26,11 +26,11 @@
         <!--配置mybatis核心配置文件的路径-->
         <property name="configLocation" value="classpath:SqlMapConfig.xml"/>
         <!--注册实体类，起别名-->
-        <property name="typeAliasesPackage" value="com.bjpowernode.pojo"/>
+        <property name="typeAliasesPackage" value="com.bjpowernode.crm.settings.domain"/>
     </bean>
     <!--Mapper扫描-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.bjpowernode.mapper"/>
+        <property name="basePackage" value="com.bjpowernode.crm.settings.mapper"/>
     </bean>
     <!--事务管理器-->
     <!--<bean id="txMapper" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

@@ -6,6 +6,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <!--配置包扫描-->
     <context:component-scan base-package="com.bjpowernode.crm.web.controller"/>
+    <context:component-scan base-package="com.bjpowernode.crm.settings.web.controller"/>
+    <context:component-scan base-package="com.bjpowernode.crm.workbench.web.controller"/>
 
     <!--    设置视图解析器   /admin/     main    .jsp  -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -13,11 +15,29 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--配置拦截请求-->
+            <mvc:mapping path="/settings/**"/>
+            <mvc:mapping path="/workbench/**"/>
+            <!--方行的请求-->
+            <mvc:exclude-mapping path="/settings/qx/user/toLogin"/>
+            <mvc:exclude-mapping path="/settings/qx/user/login"/>
+            <!--拦截器类-->
+            <bean class="com.bjpowernode.crm.settings.web.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!--    设置文件上传核心组件-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="#{1024*1024*80}"/>
         <property name="defaultEncoding" value="utf-8"/>
     </bean>
+
+    <!-- 配置静态资源的资源处理方式。(不配置js文件无法加载到相应的静态资源) -->
+    <mvc:resources mapping="/jquery/**" location="/jquery/" />
+    <mvc:resources mapping="/image/**" location="/image/" />
     <!--添加注解驱动-->
     <mvc:annotation-driven/>
     <mvc:cors>
