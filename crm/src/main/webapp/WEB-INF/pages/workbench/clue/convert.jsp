@@ -1,11 +1,16 @@
-﻿<!DOCTYPE html>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+%><!--动态获取当前协议，服务器ip地址，服务器端口号-->
 <html>
 <head>
+	<base href="<%=basePath%>"><!--所有路径开端以此开始-->
 <meta charset="UTF-8">
 
-<link href="../../jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="../../jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="../../jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 
 
 <link href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
@@ -26,7 +31,7 @@
 
 </head>
 <body>
-	
+
 	<!-- 搜索市场活动的模态窗口 -->
 	<div class="modal fade" id="searchActivityModal" role="dialog" >
 		<div class="modal-dialog" role="document" style="width: 90%;">
@@ -93,7 +98,7 @@
 		为客户创建交易
 	</div>
 	<div id="create-transaction2" style="position: relative; left: 40px; top: 20px; width: 80%; background-color: #F7F7F7; display: none;" >
-	
+
 		<form>
 		  <div class="form-group" style="width: 400px; position: relative; left: 20px;">
 		    <label for="amountOfMoney">金额</label>
@@ -127,9 +132,9 @@
 		    <input type="text" class="form-control" id="activity" placeholder="点击上面搜索" readonly>
 		  </div>
 		</form>
-		
+
 	</div>
-	
+
 	<div id="owner" style="position: relative; left: 40px; height: 35px; top: 50px;">
 		记录的所有者：<br>
 		<b>zhangsan</b>

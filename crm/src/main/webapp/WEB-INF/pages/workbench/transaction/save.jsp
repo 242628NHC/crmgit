@@ -1,20 +1,25 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+%><!--动态获取当前协议，服务器ip地址，服务器端口号-->
 <html>
 <head>
+	<base href="<%=basePath%>"><!--所有路径开端以此开始-->
 <meta charset="UTF-8">
 
-<link href="../../jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<link href="../../jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
 
-<script type="text/javascript" src="../../jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="../../jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="../../jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
 
 </head>
 <body>
 
-	<!-- 查找市场活动 -->	
+	<!-- 查找市场活动 -->
 	<div class="modal fade" id="findMarketActivity" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 80%;">
 			<div class="modal-content">
@@ -65,7 +70,7 @@
 		</div>
 	</div>
 
-	<!-- 查找联系人 -->	
+	<!-- 查找联系人 -->
 	<div class="modal fade" id="findContacts" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 80%;">
 			<div class="modal-content">
@@ -112,8 +117,8 @@
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<div style="position:  relative; left: 30px;">
 		<h3>创建交易</h3>
 	  	<div style="position: relative; top: -40px; left: 70%;">
@@ -137,7 +142,7 @@
 				<input type="text" class="form-control" id="create-amountOfMoney">
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label for="create-transactionName" class="col-sm-2 control-label">名称<span style="font-size: 15px; color: red;">*</span></label>
 			<div class="col-sm-10" style="width: 300px;">
@@ -148,7 +153,7 @@
 				<input type="text" class="form-control" id="create-expectedClosingDate">
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label for="create-accountName" class="col-sm-2 control-label">客户名称<span style="font-size: 15px; color: red;">*</span></label>
 			<div class="col-sm-10" style="width: 300px;">
@@ -170,7 +175,7 @@
 			  </select>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label for="create-transactionType" class="col-sm-2 control-label">类型</label>
 			<div class="col-sm-10" style="width: 300px;">
@@ -185,7 +190,7 @@
 				<input type="text" class="form-control" id="create-possibility">
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label for="create-clueSource" class="col-sm-2 control-label">来源</label>
 			<div class="col-sm-10" style="width: 300px;">
@@ -212,35 +217,35 @@
 				<input type="text" class="form-control" id="create-activitySrc">
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label for="create-contactsName" class="col-sm-2 control-label">联系人名称&nbsp;&nbsp;<a href="javascript:void(0);" data-toggle="modal" data-target="#findContacts"><span class="glyphicon glyphicon-search"></span></a></label>
 			<div class="col-sm-10" style="width: 300px;">
 				<input type="text" class="form-control" id="create-contactsName">
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label for="create-describe" class="col-sm-2 control-label">描述</label>
 			<div class="col-sm-10" style="width: 70%;">
 				<textarea class="form-control" rows="3" id="create-describe"></textarea>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label for="create-contactSummary" class="col-sm-2 control-label">联系纪要</label>
 			<div class="col-sm-10" style="width: 70%;">
 				<textarea class="form-control" rows="3" id="create-contactSummary"></textarea>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label for="create-nextContactTime" class="col-sm-2 control-label">下次联系时间</label>
 			<div class="col-sm-10" style="width: 300px;">
 				<input type="text" class="form-control" id="create-nextContactTime">
 			</div>
 		</div>
-		
+
 	</form>
 </body>
 </html>
